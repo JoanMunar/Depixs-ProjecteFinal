@@ -1,0 +1,571 @@
+{% extends 'base.html' %}
+{% load static staticfiles sekizai_tags thumbnail %}
+
+{% block metatitle %}Chat{% endblock metatitle %}
+
+{% block body_class %}background_blue{% endblock %}
+
+{% block content %}
+
+    {#    {% if start_game %}#}
+    {#        <div class="overlay ml-0">#}
+    {#            <div id="countdown" class="centered animated fadeInUp infinite">#}
+    {#                <div id="countdown-number"></div>#}
+    {#            </div>#}
+    {#        </div>#}
+    {#    {% endif %}#}
+
+    {#    <div class="overlay-loser ml-0" {% if not loser %}style="display: none;"{% endif %}>#}
+    {#        <h2 class="white text-center mt-5 animated fadeInUp">#}
+    {#            ¡Game Over!#}
+    {#        </h2>#}
+    {#        <div class="block icon-block inner-space text-center" style="box-shadow: none;">#}
+    {#            <div class="row">#}
+    {#                <div class="col-12 text-center">#}
+    {#                    <a href="{% url 'home' %}" class="btn btn-success btn-start mt-5 mb-2 animated zoomIn">#}
+    {#                        Volver#}
+    {#                    </a>#}
+    {#                </div>#}
+    {#            </div>#}
+    {#        </div>#}
+    {#    </div>#}
+
+    {% if winner %}
+        <div class="overlay-winner ml-0">
+            <h2 class="white text-center mt-5 animated fadeInUp">
+                ¡Has ganado!
+            </h2>
+            <div class="block icon-block inner-space text-center" style="box-shadow: none;">
+                <div class="row">
+                    <div class="col-12 mt-auto mb-auto pr-0">
+                        {% if user.image %}
+                            {% thumbnail user2_image "150x150" crop="center" as im %}
+                                <img id="img" src="{{ im.url }}" width="{{ im.width }}"
+                                     height="{{ im.height }}"
+                                     class="circle mb-1 raised move" style="width: 175px;">
+                            {% endthumbnail %}
+                        {% else %}
+                            <img id="img" src="{% static 'images/login_img.jpg' %}" width="300"
+                                 height="300" class="circle mb-1 raised move">
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <a href="https://www.instagram.com/{{ user2_username }}/" target="_blank">
+                            <h4 class="box-title text-center white animated tada">
+                                @{{ user2_username }}
+                            </h4>
+                        </a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h6 class="box-title text-center white animated zoomIn">
+                            Puntos obtenidos: {{ earned_points }}
+                        </h6>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h6 class="box-title text-center white animated zoomIn">
+                            Puntos totales: {{ total_points }}
+                        </h6>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <a href="{% url 'home' %}" class="btn btn-success btn-start mt-5 mb-2 animated zoomIn">
+                            Volver
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% elif not winner %}
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 col-md-4 mr-auto ml-auto pl-1 pr-1">
+                    <div class="card testimonial-card" style="margin-top: 40px;">
+                        <div class="card-body pt-3 pb-3">
+                            <div class="block testimonial-block ">
+                                {% if request.user.id == chat.user_one.id and chat.percent_depix < 100 %}
+                                    <div class="row">
+                                        <div class="card-image col-4 mt-auto mb-auto">
+                                            {#                                            {% thumbnail chat.user_two.get_pixelated_image_url "300x300" crop="center" as im %}#}
+                                            {#                                                <img id="myImg" src="{{ im.url }}" width="{{ im.width }}"#}
+                                            {#                                                     height="{{ im.height }}" style="border: none;"#}
+                                            {#                                                     class="circle mb-2 raised move mt-0">#}
+                                            {#                                            {% endthumbnail %}#}
+                                            <img id="myImg" src="{{ chat.user_two.get_pixelated_image_url }}"
+                                                 class="circle mb-2 raised move mt-0 black-white"
+                                                 style="width: 68px;height: 68px;">
+                                        </div>
+                                        <div class="col-8">
+                                            <div class="row">
+                                                <div class="col-5">
+                                                    <span>
+                                                        @?????
+                                                    </span>
+                                                </div>
+
+                                                <div class="col-7 text-center">
+                                                    {% if chat.user_one.points == 0 %}
+                                                        <button id="guessDisabled" type="button"
+                                                                class="guess-button disabled"
+                                                                data-toggle="modal"
+                                                                style="border: none; ">
+                                                            <span class="white">¡Adivina!</span>
+                                                        </button>
+                                                    {% else %}
+                                                        <button type="button" class="guess-button"
+                                                                data-target="#guessModal" data-toggle="modal"
+                                                                style="border: none; ">
+                                                            <span class="white">¡Adivina!</span>
+                                                        </button>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                            <div class="row mt-2">
+                                                <div class="col-12">
+                                                    <p style="font-size: 16px;">
+                                                        Puntos Depixs:
+                                                        {{ chat.user_one.points }}
+                                                        {% if attempt %}
+                                                            <span class="animated fadeOut">
+                                                                    -{{ points_lost }}
+                                                                </span>
+                                                        {% endif %}
+                                                        </span>
+                                                    </p>
+                                                </div>
+                                                {#                                                <div class="col-5 {% if attempt %}animated shake{% endif %}">#}
+                                                {#                                                    <strong>{{ chat.attempts }}</strong>#}
+                                                {#                                                    <i class="material-icons vertical-mid"#}
+                                                {#                                                       style="font-size: 14px;">refresh</i>#}
+                                                {#                                                </div>#}
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% elif request.user.id != chat.user_one.id and chat.percent_depix >= 100 %}
+                                    <div class="row">
+                                        <div class="card-image col-4 mt-auto mb-auto">
+                                            <img id="myImg" src="/media/{{ chat.user_one.image }}"
+                                                 style="border: none; width: 68px; height: 68px; object-fit:cover;"
+                                                 class="circle mb-2 raised move mt-0">
+                                        </div>
+                                        <div class="col-8 mt-auto mb-auto">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <a href="https://www.instagram.com/{{ chat.user_one.username }}/"
+                                                       target="_blank">
+                                                        <p>
+                                                            @{{ chat.user_one.username }}
+                                                        </p>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            {% if chat.percent_depix < 100 %}
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <p style="font-size: 14px;">
+                                                            Mis puntos: {{ chat.user_two.points }}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                {% elif request.user.id == chat.user_two.id and chat.percent_depix < 100 %}
+                                    <div class="row">
+                                        <div class="card-image col-4 mt-auto mb-auto">
+                                            <img id="myImg" src="/media/{{ chat.user_one.image }}"
+                                                 style="border: none; width: 68px; height: 68px; object-fit:cover;"
+                                                 class="circle mb-2 raised move mt-0">
+                                        </div>
+                                        <div class="col-8 mt-auto mb-auto">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <a href="https://www.instagram.com/{{ chat.user_one.username }}/"
+                                                       target="_blank">
+                                                        <p>
+                                                            @{{ chat.user_one.username }}
+                                                        </p>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    <div class="row">
+                                        <div class="card-image col-3 mt-auto mb-auto">
+                                            <img id="myImg" src="/media/{{ chat.user_two.image }}"
+                                                 style="border: none; width: 68px; height: 68px; object-fit:cover;"
+                                                 class="circle mb-2 raised move mt-0">
+                                        </div>
+                                        <div class="col-7 mt-auto mb-auto">
+                                            <p>
+                                                @{{ chat.user_two.username }}
+                                            </p>
+                                        </div>
+                                        <div class="col-2 mt-auto mb-auto">
+                                            <a href="https://www.instagram.com/{{ chat.user_two.username }}/"
+                                               target="_blank">
+                                                <i class="fa fa-instagram"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                                <div id="chat-box" class="chat-box row pt-2 pb-0"></div>
+                            </div>
+                        </div><!-- / testimonial-block -->
+                    </div><!-- / card-body -->
+                </div><!-- / card -->
+                <div class="row bg-white fixed-bottom chat">
+                    <div class="col-12 p-2">
+                        <form id="chat_interaction" method="POST"
+                              action="{% url 'interactions' pk=chat.id %}"> {% csrf_token %}
+                            <div class="input-group ">
+                                <input id="chat-input" type="text" class="form-control chat-input" name="message"
+                                       placeholder="Escribe un mensaje aquí"/>
+                                <div class="input-group-append">
+                                    <button class="btn btn-send" type="submit">
+                                        <i class="material-icons icon-gray vertical-mid">send</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    <!-- Modal -->
+    <div class="modal fade" id="guessModal" tabindex="-1" role="dialog" aria-labelledby="guessModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <form id="check" method="POST">{% csrf_token %}
+                <input type="hidden" name="attempts" value="{{ chat.attempts }}"/>
+                <div class="modal-content">
+                    {#                <div class="modal-header">#}
+                    {#                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>#}
+                    {#                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">#}
+                    {#                        <span aria-hidden="true">&times;</span>#}
+                    {#                    </button>#}
+                    {#                </div>#}
+                    <div id="modalBody" class="modal-body">
+                        {% for user in request.user.get_carousel %}
+                            <div class="row pb-2 user-box">
+                                <div class="card-image col-4 mt-auto mb-auto text-center">
+                                    {% if user.image %}
+                                        {% thumbnail user.image "300x300" crop="center" as im %}
+                                            <img id="img" src="{{ im.url }}" style="width: 76px;"
+                                                 class="circle mb-1 raised move">
+                                        {% endthumbnail %}
+                                    {% endif %}
+                                </div>
+                                <div class="col-8">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <p>{{ user.username }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <p>
+                                                <strong>{{ user.study }}</strong>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <a href="https://www.instagram.com/{{ user.username }}/" target="_blank">
+                                                <i class="fa fa-instagram"></i>
+                                            </a>
+                                        </div>
+                                        <div class="col-8 text-right">
+                                            <div class="radio">
+                                                <input class="input-check" type="radio" name="check"
+                                                       value="{{ user.username }}"/>
+                                                <label></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                        {% endfor %}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary p-2" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary p-2">Adivinar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Img modal -->
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="img01">
+    </div>
+
+    <!-- Modal depixs guess (0 points)  -->
+    <div id="noPoints" class="modal fade" role="dialog" tabindex="-1" style="margin-top: 110px;">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header bg-primary" style="border-radius: 5px 5px 0 0;">
+                    <p class="modal-title white">
+                        Obtén puntos Depixs
+                    </p>
+                    <button type="button" class="close white" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body resize">
+                    <p style="font-size: 16px;">
+                        ¡Vaya! Parece que te has quedado sin puntos Depixs. Puedes conseguir más si compartes la
+                        aplicación con tus amigos mediante el enlace que te proporcionamos.¡Cuantos más amigos, más
+                        puntos obtendrás!
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <a data-action="share/whatsapp/share" style="padding: 0.5rem 1rem;"
+                       href="whatsapp://send?text=¡Únete a Depixs! http://www.depixs.com/register/?r={{ request.user.id }}"
+                       class="btn btn-primary">
+                        <i class="fa fa-icon fa-whatsapp"></i> Compartir
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    {% addtoblock 'js' %}
+
+        <script>
+            $('.fadeOut').queue(function (next) {
+                $(this).css("color", "#a94442");
+                next();
+            }).delay(1000).queue(function (next) {
+                $(this).css("color", "#555555");
+                next();
+            });
+
+            $("#guessDisabled").click(function () {
+                $('#noPoints').modal('show')
+            });
+
+        </script>
+
+        <!-- Countdown start -->
+
+        <script>
+
+            var countdownNumberEl = $('#countdown-number');
+            var overlay = $('.overlay');
+            var countdown = 5;
+
+            countdownNumberEl.html(countdown);
+
+            setInterval(function () {
+                countdown = --countdown;
+
+                if (countdown !== 0 || 1) {
+                    countdownNumberEl.html(countdown);
+                }
+
+                if (countdown === 0) {
+                    overlay.remove();
+                }
+
+            }, 960);
+
+        </script>
+
+
+        <!-- Timer -->
+        {##}
+        {#        <script>#}
+        {#            function getTimeRemaining(endtime) {#}
+        {##}
+        {#                console.log(endtime);#}
+        {##}
+        {#                var t = endtime - Date.parse(new Date());#}
+        {#                var seconds = Math.floor((t / 1000) % 60);#}
+        {#                var minutes = Math.floor((t / 1000 / 60) % 60);#}
+        {#                var hours = Math.floor((t / (1000 * 60 * 60)) % 24);#}
+        {#                return {#}
+        {#                    'total': t,#}
+        {#                    'hours': hours,#}
+        {#                    'minutes': minutes,#}
+        {#                    'seconds': seconds#}
+        {#                };#}
+        {#            }#}
+        {##}
+        {#            function initializeClock(id, endtime) {#}
+        {#                var clock = document.getElementById(id);#}
+        {#                var timeSpan = clock.querySelector('.time');#}
+        {##}
+        {#                function updateClock() {#}
+        {#                    var t = getTimeRemaining(endtime);#}
+        {#                    var timeLeft;#}
+        {#                    var total_seconds = (t.total / 1000) / 864;#}
+        {#                    $('.progress-bar-animated').css("width", total_seconds + '%');#}
+        {##}
+        {#                    timeLeft = (('0' + t.hours).slice(-2) + ":" + ('0' + t.minutes).slice(-2) + ":" + ('0' + t.seconds).slice(-2)) + "h";#}
+        {#                    timeSpan.innerHTML = timeLeft;#}
+        {##}
+        {#                    if (timeLeft === '00:00:01h') {#}
+        {#                        $('.overlay-loser').css('display', 'block')#}
+        {#                    }#}
+        {##}
+        {#                    if (t.total <= 0) {#}
+        {#                        clearInterval(timeinterval);#}
+        {#                    }#}
+        {#                }#}
+        {##}
+        {#                updateClock();#}
+        {#                var timeinterval = setInterval(updateClock, 1000);#}
+        {#            }#}
+        {##}
+        {#            var deadline_date = new Date({{ chat.get_end_time|date:"Y, m, d, H, i, s" }});#}
+        {#            var deadline = deadline_date.setMonth(deadline_date.getMonth() - 1);#}
+        {#            initializeClock('clockdiv', deadline);#}
+        {##}
+        {#        </script>#}
+
+
+        <!-- Chat messages -->
+        <script>
+            var last_interaction = 0;
+
+            // Attach a submit handler to the form
+            $("#chat_interaction").submit(function (event) {
+                // Stop form from submitting normally
+                event.preventDefault();
+
+                // Get some values from elements on the page:
+                var message = $(this).find("input[name='message']").val();
+                if (message.length) {
+                    var csrfmiddlewaretoken = $(this).find("input[name='csrfmiddlewaretoken']").val();
+                    var url = $(this).attr("action");
+
+                    // Send the data using post
+                    var posting = $.post(url, {
+                        message: message,
+                        from: last_interaction,
+                        csrfmiddlewaretoken: csrfmiddlewaretoken
+                    });
+
+                    // Put the results in a div
+                    posting.done(function (data) {
+                        append_messages(data);
+                    });
+                    $(this).find("input[name='message']").val('')
+                }
+            });
+
+            function get_new_messages() {
+                var url = $("#chat_interaction").attr("action");
+                $.get(url, {
+                    from: last_interaction
+                }).done(function (data) {
+                    append_messages(data);
+                });
+            }
+
+            function append_messages(data) {
+                if (data.interactions.length) {
+                    $.each(data.interactions, function (i, item) {
+                        var position = 'left';
+                        var tagColor = 'secondary';
+                        if (item.author == '{{ request.user.pk }}') {
+                            position = 'right';
+                            tagColor = 'primary';
+                        }
+
+                        $("#chat-box").append(
+                            '<div class="col-12 message text-' + position + '"><p class="badge badge-' + tagColor + '">' +
+                            item.message +
+                            '</p></div>');
+
+                        last_interaction = item.pk;
+                    });
+
+                    var x = $(".progress-bar").width() / $('.progress-bar').parent().width() * 100;
+
+                    if (x == 50) {
+                        $("#chat-box").append(
+                            '<div class="col-12 message text-right"><p class="badge badge-info">' +
+                            '¡Corre! Ha pasado la mitad de tu tiempo límite!' +
+                            '</p></div>'
+                        );
+                    }
+
+                    $("#chat-box").animate({scrollTop: 9999});
+                }
+            }
+
+            get_new_messages();
+            setInterval(get_new_messages, 5000);
+
+        </script>
+
+        <!-- Resize chat-box and guessModal -->
+
+        <script>
+            function resize_chat_box() {
+                var height = $(window).height() - 285;
+                $('#chat-box').height(height);
+            }
+
+            function resize_guessModal() {
+                var height = $(window).height() - 150;
+                $('#modalBody').height(height);
+            }
+
+            $(window).resize(function () {
+                resize_chat_box();
+                resize_guessModal();
+            });
+            resize_chat_box();
+            resize_guessModal();
+        </script>
+
+        <!-- Img zoom -->
+        <script>
+            // Get the modal
+            var modal = document.getElementById('myModal');
+
+            // Get the image and insert it inside the modal - use its "alt" text as a caption
+            var img = document.getElementById('myImg');
+            var modalImg = document.getElementById("img01");
+            var captionText = document.getElementById("caption");
+            img.onclick = function () {
+                modal.style.display = "block";
+                modalImg.src = this.src;
+                captionText.innerHTML = this.alt;
+            };
+
+            // Get the <span> element that closes the modal
+            var span = document.getElementsByClassName("close")[0];
+
+            // When the user clicks on <span> (x), close the modal
+            span.onclick = function () {
+                modal.style.display = "none";
+            }
+        </script>
+
+        <!-- Radio check -->
+
+        <script>
+            $(".user-box").click(function () {
+                $(this).find('input').prop('checked', true);
+            });
+        </script>
+
+    {% endaddtoblock %}
+
+{% endblock %}

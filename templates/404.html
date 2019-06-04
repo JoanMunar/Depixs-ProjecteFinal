@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static staticfiles sekizai_tags %}
+
+{% block metatitle %}Error 404{% endblock metatitle %}
+
+{% block body_class %}background_blue{% endblock %}
+
+{% block content %}
+
+    <div class="container loginModal">
+        <div class="row">
+            <div class="col-8 col-sm-4 ml-auto mr-auto">
+                <img width="100%" src="{% static 'images/anagram.png' %}"/>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-12">
+                <h1>Error 404</h1>
+            </div>
+    	</div>
+    </div>
+
+{% endblock %}

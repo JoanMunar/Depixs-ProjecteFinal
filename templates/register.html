@@ -1,0 +1,177 @@
+{% extends 'base.html' %}
+{% load static staticfiles sekizai_tags thumbnail %}
+
+{% block metatitle %}Regístrate{% endblock metatitle %}
+
+{% block body_class %}background_blue{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                {% include 'error_msg.html' %}
+                {% include 'success_msg.html' %}
+            </div>
+        </div>
+        <div class="card card-login testimonial-card">
+            <div class="card-body">
+                <div class="block testimonial-block text-center">
+                    <form class="validate" method="POST" enctype="multipart/form-data">{% csrf_token %}
+                        <!-- Image -->
+                        <div class="image-container">
+                            <label for="user_image_input">
+                                <img id="img" src="{% static 'images/login_img.jpg' %}"
+                                     class="circle w-50 mb-1 raised move">
+                            </label>
+                            <input id="user_image_input" name="image" type="file" accept="image/*">
+                        </div>
+                        <!-- Username -->
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="username" name="username" required
+                                   placeholder="Nombre usuario">
+                        </div>
+                        <!-- Contraseña -->
+                        <div class="form-group">
+                            <input type="password" class="form-control" id="password" name="password" required
+                                   placeholder="Contraseña">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" id="repeat-password" name="repeat-password"
+                                   placeholder="Repetir contraseña" onkeyup="checkPasswordMatch();" required>
+                        </div>
+                        <div id="divCheckPasswordMatch" class="text-left mb-2"></div>
+                        <!-- Email -->
+                        <div class="form-group">
+                            <input type="email" class="form-control" id="email" name="email" required
+                                   placeholder="Correo electrónico">
+                        </div>
+                        <!-- Colleges selector -->
+                        <div class="btn-group full-width">
+                            <div class="form-group full-width">
+                                <select class="form-control full-width" id="college" name="college" required>
+                                    <option value="" disabled selected>Selecciona tu universidad</option>
+                                    {% for college in colleges %}
+                                        <option value="{{ college.id }}">
+                                            {{ college.name }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <!-- Studies selector -->
+                        <div class="btn-group full-width">
+                            <div class="form-group full-width">
+                                <select class="form-control full-width" id="study" name="study" required>
+                                    <option value="" disabled selected>Selecciona tus estudios</option>
+                                    {% for study in studies %}
+                                        <option value="{{ study.id }}">
+                                            {{ study.name }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <!-- Género -->
+                        <div class="row">
+                            <div class="col-12 text-left">
+                                <small>Género</small>
+                            </div>
+                        </div>
+                        <div id="radio-profile" class="col-12">
+                            <div class="radio radio-primary mt-3 custom-control custom-radio custom-control-inline">
+                                <label class="hidden">
+                                    <input type="radio">
+                                </label>
+                                <input type="radio" name="gender" id="man" value="1" checked>
+                                <label for="man">
+                                    <span>Chico</span>
+                                </label>
+                            </div>
+                            <div class="radio radio-primary mt-2 ml-0 custom-control custom-radio custom-control-inline">
+                                <label class="hidden">
+                                    <input type="radio">
+                                </label>
+                                <input type="radio" name="gender" id="woman" value="2">
+                                <label for="woman">
+                                    <span>Chica</span>
+                                </label>
+                            </div>
+                        </div>
+                        <!-- Save button -->
+                        <div class="row mt-3">
+                            <div class="col-12">
+                                <button disabled class="btn btn-primary mt-2 mb-2" type="submit">
+                                    Registrarme
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <small>
+                                <a href="{% url 'login' %}">
+                                    Iniciar sesión
+                                </a>
+                            </small>
+                        </div>
+                    </div>
+                </div><!-- / testimonial-block -->
+
+            </div><!-- / card-body -->
+        </div><!-- / card -->
+    </div>
+
+    {% addtoblock 'js' %}
+
+        <script>
+
+            function readURL(input) {
+
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        $('#img').attr('src', e.target.result);
+                    };
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+            $("#user_image_input").change(function () {
+                readURL(this);
+            });
+
+        </script>
+
+        <script>
+
+            function checkPasswordMatch() {
+                var password = $("#password").val();
+                var confirmPassword = $("#repeat-password").val();
+
+                if (password.length > 1) {
+                    if (password !== confirmPassword || confirmPassword !== password) {
+                        $('button[type="submit"]').prop('disabled', true);
+                        $("#divCheckPasswordMatch").html("Las contraseñas no coinciden");
+                        $("#divCheckPasswordMatch").css("color", "#dc3545");
+                    } else {
+                        $("#divCheckPasswordMatch").html("Las contraseñas coinciden");
+                        $("#divCheckPasswordMatch").css("color", "#28a745");
+                        $('button[type="submit"]').prop('disabled', false);
+                    }
+                }
+
+            }
+
+            $(document).ready(function () {
+                $("#password, #repeat-password").keyup(checkPasswordMatch);
+            });
+
+
+        </script>
+
+    {% endaddtoblock %}
+
+{% endblock %}

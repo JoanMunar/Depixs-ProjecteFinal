@@ -1,0 +1,15 @@
+{% load sekizai_tags i18n staticfiles %}
+
+{% if error_msg %}
+    {% addtoblock 'js' %}
+        <script>
+            $(document).ready(function () {
+                swal(
+                        'Error!',
+                        '{{ error_msg }}',
+                        'error'
+                );
+            });
+        </script>
+    {% endaddtoblock %}
+{% endif %}

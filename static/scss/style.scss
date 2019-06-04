@@ -1,0 +1,148 @@
+@import "variables";
+@import "mixins";
+@import "custom";
+@import "typography";
+@import "alerts-badges";
+@import "buttons";
+@import "cards";
+@import "carousel";
+@import "collapse-dropdowns";
+@import "forms-input";
+@import "tables";
+@import "modals";
+@import "navigations";
+@import "popovers-tooltips";
+@import "progress";
+@import "content";
+@import "sliders";
+@import "footers";
+
+/*------- demo -------*/
+
+header {
+    background: url("../images/header-image.jpg") no-repeat;
+    background-size: cover;
+    background-position: center;
+    padding: 200px 0 240px 0;
+}
+
+.container.content-container {
+    width: 100% !important;
+    max-width: 1280px;
+}
+
+.content {
+    background: $light-bg-color;
+    border-radius: 8px;
+    -webkit-box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
+    margin-top: -120px;
+    padding: 30px;
+}
+
+.content.not-first {
+    margin-top: 50px;
+}
+
+.header-logo {
+    max-width: 60px;
+}
+
+.form-wrapper {
+    background: $white;
+    border: 2px solid $secondary;
+    padding: 30px;
+}
+
+.form-title {
+    font-size: 1.375rem;
+    margin-bottom: 30px;
+}
+
+.form-inline-extras {
+    display: table;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.form-inline-extras .checkbox {
+    margin-left: 2px;
+}
+
+.custom-form .left-area {
+    display: inline-block;
+    width: 50%;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.custom-form .right-area {
+    display: inline-block;
+    width: 50%;
+    text-align: right;
+    vertical-align: middle;
+}
+
+.custom-form .left-area.long {
+    width: 75%;
+}
+
+.custom-form .right-area.long {
+    width: 75%;
+}
+
+.custom-form .left-area.short {
+    width: 25%;
+}
+
+.custom-form .right-area.short {
+    width: 25%;
+}
+
+.form-extras {
+    display: table;
+    width: 100%;
+    margin-top: 15px;
+}
+
+.modal.terms {
+    z-index: 1060;
+}
+
+.scroll-to-top {
+    background: $primary;
+    color: $white;
+    width: 40px;
+    height: 40px;
+    bottom: 20px;
+    right: 20px;
+    line-height: 38px;
+    position: fixed;
+    text-align: center;
+    font-size: 18px;
+    z-index: 99;
+
+&.is-hidden {
+    opacity: 0;
+    -webkit-transform: translate(0,-5px);
+    -webkit-transition: -webkit-transform .2s,background .2s,color .2s,opacity 0 .2s;
+}
+
+&.is-visible {
+    opacity: 1;
+    -webkit-transform: translate(0,0);
+    -webkit-transition: -webkit-transform .2s,background .2s,color .2s;
+}
+}
+
+.scroll-to-top:hover, .scroll-to-top:active, .scroll-to-top:focus {
+    color: $white;
+}
+
+.demo-footer {
+    background: $primary;
+}
+
+/*------- end of demo -------*/
+
+@import "media-screens";

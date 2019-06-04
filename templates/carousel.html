@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% load static staticfiles sekizai_tags thumbnail %}
+
+{% block metatitle %}Home{% endblock metatitle %}
+
+{% block body_class %}background_blue{% endblock %}
+
+{% block content %}
+    {% include 'whatsapp_banner.html' %}
+    <div id="testimonials-slider" class="dark" style="background: none;">
+        <div class="container">
+            <form method="POST">{% csrf_token %}
+                <div id="testimonials-carousel" class="owl-carousel carousel-full-nav owl-theme">
+                    {% for user in request.user.get_carousel %}
+                        <!-- Testimonial block -->
+                        <div class="block testimonial-block text-center">
+                            {% if user.image %}
+                                {% thumbnail user.image "300x300" crop="center" as im %}
+                                    <img id="img" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"
+                                         class="circle w-75 mb-1 raised move">
+                                {% endthumbnail %}
+                            {% else %}
+                                <img id="img" src="{% static 'images/login_img.jpg' %}" width="300" height="300"
+                                     class="circle w-75 mb-1 raised move">
+                            {% endif %}
+                            <h5 class="box-title mt-4 mb-3">@{{ user.username }}</h5>
+                            <p class="text-muted text-sm">Estudios: <b>{{ user.study.name }}</b></p>
+                        </div><!-- / testimonial-block -->
+                    {% endfor %}
+                </div><!-- / testimonials-carousel -->
+                <div class="row">
+                    <div class="col-12 text-center">
+                        {% if not empty %}
+                            <button disabled class="btn btn-primary btn-lg btn-start mt-4 mb-2">
+                                Depixs
+                            </button>
+                        {% else %}
+                            <div class="alert alert-danger alert-dismissible fade show mt-4" role="alert"
+                                 style="font-size: 12px; padding: 5px 10px;">
+                                <i class="material-icons vertical-mid"
+                                   style="font-size: 20px;">notification_important</i>
+                                <strong>No hay más usuarios disponibles</strong><br>
+                                Termina todos los juegos activos o espere a mañana para más.
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </form>
+        </div><!-- / container -->
+    </div><!-- / testimonials-slider -->
+
+    {% addtoblock 'js' %}
+
+        <script>
+
+            setTimeout(function () {
+
+                $('#carousel-full').owlCarousel({
+                    loop: true,
+                    margin: 10,
+                    nav: false,
+                    dots: true,
+                    items: 1,
+                    animateIn: 'slideInRight',
+                    animateOut: 'slideOutLeft'
+                });
+
+                $('#carousel-full-nav').owlCarousel({
+                    loop: true,
+                    margin: 10,
+                    nav: true,
+                    dots: false,
+                    navText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
+                    items: 1,
+                    {#animateIn: 'slideInRight',#}
+                    {#animateOut: 'slideOutLeft'#}
+                });
+
+                $('#testimonials-carousel').owlCarousel({
+                    loop: true,
+                    margin: 10,
+                    nav: true,
+                    dots: false,
+                    navText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
+                    items: 1,
+                    {#animateIn: 'slideInLeft',#}
+                    {#animateOut: 'slideOutRight',#}
+                    autoHeight: true
+                });
+
+
+                var owl = $('.owl-carousel');
+                var count = 0;
+                owl.owlCarousel();
+
+                owl.on('changed.owl.carousel', function () {
+                    count += 1;
+                    disableButton();
+                });
+
+                function disableButton() {
+                    if (count === 3) {
+                        $('.btn-start').addClass('animated zoomIn fast');
+                        $('.btn-start').prop('disabled', false);
+                    }
+                }
+
+            }, 250);
+
+        </script>
+
+    {% endaddtoblock %}
+
+{% endblock %}

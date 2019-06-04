@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static staticfiles sekizai_tags %}
+
+{% block metatitle %}Iniciar sesión{% endblock metatitle %}
+
+{% block body_class %}background_blue{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                {% include 'error_msg.html' %}
+                {% include 'success_msg.html' %}
+            </div>
+        </div>
+        <div class="card card-login">
+            <div class="card-body text-center">
+                <h4 class="card-title blue">Iniciar sesión</h4>
+                <form method="post">{% csrf_token %}
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="username" name="username"
+                                       placeholder="Nombre usuario">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-12 text-center">
+                            <div class="form-group">
+                                <input type="password" class="form-control" id="password" name="password"
+                                       placeholder="Contraseña">
+                            </div>
+                        </div>
+                    </div>
+                    {#                    <div class="row mt-3">#}
+                    {#                        <div class="col-12">#}
+                    {#                            <div class="checkbox checkbox-primary white">#}
+                    {#                                <input id="checkbox" type="checkbox" class="check required">#}
+                    {#                                <label for="checkbox" style="font-size: 16px;">#}
+                    {#                                    Acepto los Términos y Condiciones de uso#}
+                    {#                                </label>#}
+                    {#                            </div>#}
+                    {#                        </div>#}
+                    {#                    </div>#}
+                    <div class="row mt-4">
+                        <div class="col-12 text-center">
+                            <button id="register" type="submit" class="btn btn-primary btn-lg">
+                                <span>Iniciar sesión</span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                <div class="row mt-3">
+                    <div class="col-12">
+                        <small>
+                            <a href="{% url 'register' %}">
+                                Regístrate ya
+                            </a>
+                        </small>
+                    </div>
+                </div>
+                <div class="row mt-1">
+                    <div class="col-12">
+                        <small>
+                            <a href="{% url 'password_recovery' %}">
+                                Recuperar contraseña
+                            </a>
+                        </small>
+                    </div>
+                </div>
+            </div><!-- / card-body -->
+        </div>
+    </div>
+    {% addtoblock 'js' %}
+
+        <script>
+
+
+        </script>
+
+    {% endaddtoblock %}
+
+{% endblock %}

@@ -1,0 +1,50 @@
+{% load sekizai_tags static staticfiles %}
+
+{% if sub_menu_settings or sub_menu_chat %}
+    <ul id="navigator" class="navbar mt-0 dark bg-primary fixed-top no-padding nav-top">
+        {% if sub_menu_settings %}
+            <li class="nav-item">
+
+                <a href="{% url 'config' %}" class="footer-menu-item nav-link">
+                    <i class="material-icons vertical-mid">arrow_back</i>
+                </a>
+            </li>
+        {% endif %}
+        {% if sub_menu_chat %}
+            <li class="nav-item">
+                <a href="{% url 'chats' %}" class="footer-menu-item nav-link">
+                    <i class="material-icons vertical-mid">arrow_back</i>
+                </a>
+            </li>
+{#            {% if chat.percent_depix|safe == '100' %}#}
+{#            {% elif request.user.id == chat.user_one.id and chat.percent_depixs < 100 %}#}
+{#                <li>#}
+{#                    <div id="clockdiv">#}
+{#                        <i class="material-icons vertical-mid" style="font-size: 18px;">access_time</i>#}
+{#                        <span class="time mr-2" style="font-size: 16px;"></span>#}
+{#                    </div>#}
+{#                </li>#}
+{#            {% endif %}#}
+        {% endif %}
+        </li>
+    </ul>
+{% endif %}
+
+{% addtoblock 'js' %}
+
+    <script>
+
+        $(function () {
+
+            var menu = $("#navigator").find(".nav-item");
+            var icons = menu.find('a');
+
+            icons.click(function () {
+                icons.removeClass("active");
+                $(this).addClass("active");
+            });
+
+        });
+    </script>
+
+{% endaddtoblock %}

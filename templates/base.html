@@ -1,0 +1,190 @@
+{% load static sekizai_tags %}
+<!doctype html>
+<html lang="es" class="{% block body_class %}{% endblock %}">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <link rel="shortcut icon" href="{% static 'images/favicon.png' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>{% block metatitle %}{{ title }}{% endblock metatitle %}</title>
+    <meta name="description" content="{% block metadescription %}{% endblock metadescription %}">
+
+    {% block meta_share %}{% endblock %}
+
+    <!-- Bootstrap 4 core CSS -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- Custom Styles -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'css/animate.css' %}" rel="stylesheet">
+    <link href="{% static 'css/owl.carousel.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/ripple.css' %}" rel="stylesheet">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
+
+    <link href="{% static 'css/main.css' %}" rel="stylesheet">
+    {% render_block "css" %}
+</head>
+
+<body>
+{% block header %}
+    {% include 'navbar_top.html' %}
+{% endblock header %}
+
+{% block content %}{% endblock content %}
+
+{% block footer %}
+    {% if user.is_authenticated %}
+        {% include 'navbar_bottom.html' %}
+    {% endif %}
+{% endblock footer %}
+
+<!-- Core JavaScript -->
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+        integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+        crossorigin="anonymous"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<!-- / Core JavaScript -->
+
+<script src="{% static 'js/jquery.easing.min.js' %}"></script>
+<script src="{% static 'js/form-validator.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+{#<script src="{% static 'js/smooth-scroll.js' %}"></script>#}
+<script src="{% static 'js/jquery.cookie.js' %}"></script>
+<script src="{% static 'js/sweetalert2.all.js' %}"></script>
+
+<!-- Ripple Effect -->
+<script src="{% static 'js/ripple.js' %}"></script>
+<script>$.ripple.init();
+</script>
+<!-- / Ripple Effect -->
+
+<!-- Varying Modal Example -->
+<script>
+    $('#var-modal-example').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Button that triggered the modal
+        var recipient = button.data('whatever'); // Extract info from data-* attributes
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        var modal = $(this);
+        modal.find('.modal-title').text('New message to ' + recipient);
+        modal.find('.modal-body input').val(recipient)
+    })
+</script>
+<!-- / Varying Modal Example -->
+
+<!-- Popover -->
+<script>
+    $(function () {
+        $('[data-toggle="popover"]').popover()
+    });
+
+    $('.popover-dismiss').popover({
+        trigger: 'hover'
+    })
+</script>
+<!-- / Popover -->
+
+<!-- Tooltips -->
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>
+<!-- / Tooltips -->
+
+<!-- Owl Carousel -->
+<script src="{% static 'js/owl.carousel.min.js' %}"></script>
+<!-- / Owl Carousel -->
+
+<!-- Portfolio Script -->
+<script src="{% static 'js/jquery.shuffle.min.js' %}"></script>
+<script src="{% static 'js/portfolio.js' %}"></script>
+<script>
+    $(document).ready(function () {
+        if (Modernizr.touch) {
+            // show the close overlay button
+            $(".close-overlay").removeClass("hidden");
+            // handle the adding of hover class when clicked
+            $(".img").click(function (e) {
+                if (!$(this).hasClass("hover")) {
+                    $(this).addClass("hover");
+                }
+            });
+            // handle the closing of the overlay
+            $(".close-overlay").click(function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                if ($(this).closest(".img").hasClass("hover")) {
+                    $(this).closest(".img").removeClass("hover");
+                }
+            });
+        } else {
+            // handle the mouseenter functionality
+            $(".img").mouseenter(function () {
+                $(this).addClass("hover");
+            })
+            // handle the mouseleave functionality
+                .mouseleave(function () {
+                    $(this).removeClass("hover");
+                });
+        }
+    });
+</script>
+<!-- / Portfolio Script -->
+
+<!-- Facts Counter -->
+<script src="{% static 'js/jquery.countTo.js' %}"></script>
+<script type="text/javascript">
+    $('.timer').countTo({
+        refreshInterval: 60,
+        formatter: function (value, options) {
+            return value.toFixed(options.decimals);
+        }
+    });
+</script>
+<script>
+    document.addEventListener('touchmove', function (event) {
+        if (event.scale !== 1) {
+          event.preventDefault();
+        }
+    }, false);
+</script>
+<!-- / Facts Counter -->
+
+<!-- Hide Nav -->
+<script src="{% static 'js/hide-nav.js' %}"></script>
+<!-- / Hide Nav -->
+
+<script type="text/javascript">
+    $(window).on('load', function () {
+
+        setTimeout(function () {
+
+            if (!$.cookie("whatsapp-modal-close")) {
+
+                $('#whatsapp-modal').modal('show');
+            }
+
+        }, 5000);
+    });
+
+    $('#whatsapp-modal').on('hidden.bs.modal', function () {
+        setCookie('{{ request.user.id }}', 1);
+    });
+
+    function setCookie(key, value) {
+
+        $.cookie('whatsapp-modal-close', key, {expires: value, path: '/'});
+    }
+
+</script>
+
+
+{% render_block "js" %}
+
+</body>
+</html>

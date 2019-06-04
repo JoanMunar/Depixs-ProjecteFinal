@@ -1,0 +1,44 @@
+{% load sekizai_tags static staticfiles %}
+
+<ul id="navigator" class="navbar justify-content-center fixed-bottom mb-0 dark"
+    style=" background-color: #ffffff !important; padding: 10px 0 0 5px; {% if section == "chat_room" %}display: none;{% endif %}">
+    <li class="nav-item">
+        <a href="{% url 'home' %}" class="{% if section == 'home' %}active{% endif %} footer-menu-item nav-link">
+            <i class="material-icons icon-color">people</i>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="{% url 'chats' %}" class="{% if section == 'chats'  %}active{% endif %} footer-menu-item nav-link">
+            <i class="material-icons icon-color">chat</i>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="{% url 'ranking' %}" class="{% if section == 'ranking' %}active{% endif %} footer-menu-item nav-link">
+            <i class="material-icons icon-color">format_list_numbered</i>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="{% url 'config' %}" class="{% if section == 'config' %}active{% endif %} footer-menu-item nav-link">
+            <i class="material-icons icon-color">settings</i>
+        </a>
+    </li>
+</ul>
+
+{% addtoblock 'js' %}
+
+    <script>
+
+        $(function() {
+
+            var menu = $("#navigator").find(".nav-item");
+            var icons = menu.find('a');
+
+            icons.click(function() {
+                icons.removeClass("active");
+                $(this).addClass("active");
+            });
+
+        });
+    </script>
+
+{% endaddtoblock %}

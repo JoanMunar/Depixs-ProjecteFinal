@@ -1,0 +1,46 @@
+/*------- sliders -------*/
+
+.owl-carousel .block-image {
+    margin: 0 auto 15px auto;
+}
+
+.owl-carousel .block-image-big {
+    margin: 0 auto 15px auto;
+}
+
+#testimonials-slider {
+    background: url("../images/testimonial-bg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    padding: 120px 0;
+}
+
+#testimonials-slider img {
+    max-width: 150px;
+    margin: 0 auto;
+}
+
+#testimonials-slider .block {
+    max-width: 75%;
+    margin: 0 auto;
+}
+
+#testimonials-slider.dark .box-description {
+    color: $white;
+    font-size: 1.25rem;
+}
+
+#testimonials-slider .owl-next {
+    top: 40%;
+}
+
+#testimonials-slider .owl-prev {
+    top: 40%;
+}
+
+#testimonials-carousel-2 .box-description {
+    font-size: 1rem !important;
+}
+
+/*------- end of sliders -------*/

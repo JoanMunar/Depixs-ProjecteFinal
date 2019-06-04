@@ -1,0 +1,417 @@
+/*------- content areas -------*/
+
+.cb-buttons .btn {
+    margin: 4px 2px;
+}
+
+.cta {
+    padding: 15px;
+}
+
+.block {
+    margin: 15px 0;
+}
+
+.box-title {
+    margin: 15px 0;
+}
+
+.icon-block.inner-space {
+    box-shadow: 0 2px 3px rgba(0,0,0,0.16), 0 2px 3px rgba(0,0,0,0.23);
+}
+
+.icon-block .box-title {
+    margin-top: 10px;
+}
+
+.box-icon {
+    display: inline;
+    line-height: 3.5;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    padding: 25px;
+}
+
+.team-block .box-title {
+    margin-bottom: 5px;
+}
+
+.social-icons i {
+    font-size: 1.25rem;
+}
+
+.social-icons.circle-icons i {
+    font-size: 1rem;
+}
+
+.team-card {
+    margin-top: 110px;
+    margin-bottom: 30px;
+}
+
+.team-card img {
+    border: 1px solid $light-grey;
+    margin-top: -110px;
+}
+
+.team-card .block {
+    margin: 0;
+}
+
+/*--- portfolio ---*/
+
+.portfolio-filter.list-inline li {
+    padding: 0;
+    display: inline-block;
+}
+
+.portfolio-filter a {
+    color: $text-color;
+    font-size: .875rem;
+    font-weight: $bold;
+    letter-spacing: $letter-spacing-2x;
+    margin: 5px;
+    padding: 10px 16px;
+}
+
+.portfolio-filter a.active {
+    color: $white;
+    background: $primary;
+    border-radius: 50px;
+    -moz-transition: 0.2s ease-in-out;
+    -o-transition: 0.2s ease-in-out;
+    -webkit-transition: 0.2s ease-in-out;
+    transition: 0.2s ease-in-out;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.portfolio-filter a.active:hover, .portfolio-filter a.active:focus, .portfolio-filter a:active {
+    color: $white;
+    background: $primary;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.portfolio-filter a:active, .portfolio-filter a:focus {
+    color: $white !important;
+    background: $primary !important;
+    border-radius: 50px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.portfolio-filter a:hover {
+    color: $primary;
+    background-color: transparent;
+}
+
+.project {
+    margin: 15px 0;
+}
+
+.project img {
+    border-radius: 5px;
+    -moz-transition: 0.2s ease-in-out;
+    -o-transition: 0.2s ease-in-out;
+    -webkit-transition: 0.2s ease-in-out;
+    transition: 0.2s ease-in-out;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.project:hover img {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.16), 0 6px 12px rgba(0,0,0,0.23) !important;
+}
+
+.effects {
+    padding-left: 15px;
+}
+
+.effects .img {
+    position: relative;
+    float: left;
+    margin-bottom: 5px;
+    width: 25%;
+    overflow: hidden;
+}
+
+.effects .img:nth-child(n) {
+    margin-right: 5px;
+}
+
+.effects .img:first-child {
+    margin-left: -15px;
+}
+
+.effects .img:last-child {
+    margin-right: 0;
+}
+
+.effects .img img {
+    display: block;
+    margin: 0;
+    padding: 0;
+    max-width: 100%;
+    height: auto;
+}
+
+.project:hover .overlay {
+    transform: translateY(-2px);
+}
+
+.overlay {
+    display: block;
+    position: absolute;
+    z-index: 99;
+    background: $primary-transparent-2;
+    border-radius: 5px;
+    overflow: hidden;
+    transition: all 0.5s;
+    margin: 0 15px;
+}
+
+a.close-overlay {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 100;
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    font-weight: $regular;
+    color: $white !important;
+    line-height: 45px;
+    text-align: center;
+    background: $primary-hover;
+    cursor: pointer;
+}
+
+a.close-overlay.hidden {
+    display: none;
+}
+
+a.expand {
+    display: block;
+    position: absolute;
+    z-index: 100;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    color: $white;
+    line-height: 50px;
+    font-weight: $regular;
+    font-size: 3rem;
+}
+
+/* effect 1 */
+
+.effect-1 .overlay {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: 0;
+}
+
+.effect-1 .overlay a.expand {
+    left: 0;
+    right: 0;
+    top: 0;
+    margin: 0 auto;
+    opacity: 0;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s;
+}
+
+.effect-1 .img.hover .overlay {
+    opacity: 1;
+}
+
+.effect-1 .img.hover .overlay a.expand {
+    top: 50%;
+    margin-top: -30px;
+    opacity: 1;
+}
+
+/* end of effect 1 */
+
+/*--- end of portfolio ---*/
+
+.blog-card .block {
+    margin: 0;
+}
+
+.fact-icon {
+    margin-bottom: 15px;
+}
+
+.timer {
+    margin-bottom: 15px;
+}
+
+.fact-title {
+    color: $text-color;
+}
+
+/*--- pricing tables ---*/
+
+.pricing-table {
+    background: $secondary;
+    text-align: center;
+    margin: 15px 0;
+}
+
+.pricing-table ul, .pricing-table ol {
+    margin-bottom: 0;
+}
+
+.pricing-title {
+    font-size: 1.25rem;
+    font-weight: $bold;
+    padding: 30px;
+    margin-bottom: 0;
+}
+
+.pricing-table-price {
+    background: $secondary-hover;
+    font-weight: $bold;
+    padding: 15px;
+    margin-bottom: 30px;
+}
+
+.pricing-table-price.w-rounded-price {
+    display: table;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin: 0 auto 30px auto;
+    padding: 0;
+}
+
+.rounded-price {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.rounded-price .pricing-price {
+    font-size: 1.75rem;
+}
+
+.rounded-price .pricing-currency {
+    vertical-align: 10px;
+}
+
+.pricing-table-price.icon-bg {
+    background: transparent !important;
+    border: 2px solid $primary;
+    padding: 5px;
+}
+
+.featured .pricing-table-price.icon-bg {
+    border-color: $secondary;
+}
+
+.pricing-table-price p {
+    color: $title-color;
+    margin-bottom: 0;
+}
+
+.pricing-currency {
+    font-size: 1rem;
+    font-weight: $bold;
+    vertical-align: 25px;
+}
+
+.pricing-price {
+    font-size: 3rem;
+    font-weight: $bold;
+}
+
+.pricing-period {
+    font-weight: $bold;
+}
+
+.pricing-table-content li {
+    margin-bottom: 15px;
+}
+
+.pricing-table-button {
+    padding: 15px 0 35px;
+}
+
+.featured.pricing-table {
+    background: $primary;
+}
+
+.featured.pricing-table .pricing-title {
+    color: $white;
+}
+
+.featured.pricing-table .pricing-table-content ul li {
+    color: $white;
+}
+
+.featured.pricing-table p {
+    color: $white;
+}
+
+.featured.pricing-table .pricing-table-price {
+    background: $primary-hover
+}
+
+.featured.pricing-table .pricing-table-price p {
+    color: $white;
+}
+
+/*--- end of pricing tables ---*/
+
+.testimonial-card {
+    margin-top: 110px;
+    margin-bottom: 30px;
+}
+
+.testimonial-card img {
+    border: 1px solid $light-grey;
+    margin-top: -110px;
+}
+
+.testimonial-card .block {
+    margin: 0;
+}
+
+/*------- widget areas -------*/
+
+.social-sharing {
+    background: $white;
+    padding: 50px 0;
+}
+
+.social-footer {
+    background: $white;
+    padding: 30px 0;
+}
+
+.social-footer.dark {
+    background: $dark-grey;
+}
+
+.social-footer a {
+    margin: 15px 50px;
+}
+
+.newsletter-area {
+    padding: 50px 0;
+}
+
+.newsletter-area.has-background {
+    background: url("../images/newsletter-bg.jpg") no-repeat;
+    background-size: cover;
+    background-position: center;
+    padding: 100px 0;
+}
+
+/*------- end of widget areas -------*/
+
+/*------- end of content areas -------*/

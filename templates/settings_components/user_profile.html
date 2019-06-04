@@ -1,0 +1,176 @@
+{% extends 'base.html' %}
+{% load static staticfiles sekizai_tags thumbnail %}
+
+{% block metatitle %}User profile{% endblock metatitle %}
+
+{% block body_class %}background_blue{% endblock %}
+
+{% block content %}
+
+    <div class="container-fluid nav-margin">
+        <div class="row">
+            <div class="col-12 col-md-4 mr-auto ml-auto">
+                <div class="card testimonial-card">
+                    <div class="card-body">
+                        <div class="block testimonial-block text-center">
+                            <form class="validate" action="{% url 'user_profile' %}" method="POST"
+                                  enctype="multipart/form-data">{% csrf_token %}
+                                <!-- Image -->
+                                <div class="image-container">
+                                    <label for="user_image_input">
+                                        {% thumbnail user.image "300x300" crop="center" as im %}
+                                            <img id="img" src="{{ im.url }}" width="{{ im.width }}"
+                                                 height="{{ im.height }}"
+                                                 class="circle w-50 mb-1 raised move">
+                                        {% endthumbnail %}
+                                    </label>
+                                    <input id="user_image_input" name="image" type="file" accept="image/*">
+                                </div>
+                                <!-- Username -->
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h5 class="box-title mt-3 mb-1">{{ user.username }}</h5>
+                                    </div>
+                                </div>
+                                <!-- Gender -->
+                                <div class="row">
+                                    <div class="col-12">
+                                        <p class="text-muted text-sm mt-1 mb-1">
+                                            <b>Sexo: {{ user.get_gender_display }}</b></p>
+                                    </div>
+                                </div>
+                                <!-- Depix points -->
+                                <div class="row">
+                                    <div class="col-12">
+                                        <p class="text-sm mt-1 mb-2">
+                                            Puntos: <b>{{ user.points }}</b>
+                                        </p>
+                                    </div>
+                                </div>
+                                <!-- Mensaje de error -->
+                                {% if error_msg %}
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="alert alert-danger alert-dismissible fade show" role="alert"
+                                                 style="font-size: 12px; padding: 5px 10px;">
+                                                <i class="material-icons vertical-mid">notification_important</i>
+                                                <strong>¡Error!</strong>
+                                                <p style="font-size: 10px;" class="white">{{ error_msg }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                                <!-- Colleges selector -->
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="btn-group">
+                                            <div class="form-group">
+                                                <select class="form-control input-width" id="college"
+                                                        name="college">
+                                                    {% for college in colleges %}
+                                                        <option value="{{ college.id }}"
+                                                                {% if college.id == user.college_id %}selected{% endif %}>
+                                                            {{ college.name }}
+                                                        </option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Studies selector -->
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="btn-group ">
+                                            <div class="form-group">
+                                                <select class="form-control input-width" id="study" name="study">
+                                                    {% for study in studies %}
+                                                        <option value="{{ study.id }}"
+                                                                {% if study.id == user.study_id %}selected{% endif %}>
+                                                            {{ study.name }}
+                                                        </option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Preference -->
+                                <div class="row mb-2">
+                                    <div id="radio-profile" class="col-12">
+                                        <div class="radio radio-primary mt-3 custom-control custom-radio custom-control-inline">
+                                            <label class="hidden">
+                                                <input type="radio">
+                                            </label>
+                                            <input type="radio" name="preference" id="man" value="1"
+                                                    {% if user.preference == 1 %} checked {% endif %}>
+                                            <label for="man">
+                                                <span>Ver chicos</span>
+                                            </label>
+                                        </div>
+
+                                        <div class="radio radio-primary mt-2 ml-0 custom-control custom-radio custom-control-inline">
+                                            <label class="hidden">
+                                                <input type="radio">
+                                            </label>
+                                            <input type="radio" name="preference" id="woman" value="2"
+                                                    {% if user.preference == 2 %} checked {% endif %}>
+                                            <label for="woman">
+                                                <span>Ver chicas</span>
+                                            </label>
+                                        </div>
+
+                                        <div class="radio radio-primary mt-2 custom-control custom-radio custom-control-inline">
+                                            <label class="hidden">
+                                                <input type="radio">
+                                            </label>
+                                            <input type="radio" name="preference" id="both" value="3"
+                                                    {% if user.preference == 3 %} checked {% endif %}>
+                                            <label for="both">
+                                                <span>Ver ambos</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Save button -->
+                                <div class="row mt-3">
+                                    <div class="col-12">
+                                        <button class="btn btn-primary mt-2 mb-2" type="submit">
+                                            Guardar cambios
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div><!-- / testimonial-block -->
+                    </div><!-- / card-body -->
+                </div><!-- / card -->
+            </div>
+        </div>
+    </div>
+
+    {% addtoblock 'js' %}
+
+        <script>
+
+            function readURL(input) {
+
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        $('#img').attr('src', e.target.result);
+                    };
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+            $("#user_image_input").change(function () {
+                readURL(this);
+            });
+
+        </script>
+
+    {% endaddtoblock %}
+
+{% endblock %}

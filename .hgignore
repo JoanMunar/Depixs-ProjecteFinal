@@ -1,0 +1,8 @@
+syntax: glob
+.DS_Store
+.idea/
+db.sqlite3
+*.pyc
+*.orig
+depixs/settings.py
+*.xml

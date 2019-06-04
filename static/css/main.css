@@ -1,0 +1,462 @@
+.container {
+  max-width: 500px;
+}
+.black {
+  color: #555555;
+}
+.white {
+  color: #ffffff;
+}
+.btn-link:focus {
+  color: #ffffff;
+}
+.btn-link:hover {
+  color: #ffffff;
+}
+.blue {
+  color: #31c8b1;
+}
+.bg_white {
+  background-color: white;
+}
+.nav-margin {
+  margin-bottom: 55px;
+  padding-top: 20px;
+}
+.fixed-bottom {
+  z-index: 0;
+}
+.fixed-bottom.chat {
+  position: fixed;
+  right: 15px;
+  bottom: 0;
+  left: 15px;
+}
+.fixed-top {
+  z-index: 1;
+}
+.loginModal {
+  padding-top: 60px;
+}
+.btn-instagram {
+  color: white !important;
+  background: linear-gradient(200deg, #8a3ab9, #e95950, #fccc63);
+  border-color: #8a3ab9;
+}
+.btn-instagram:hover {
+  color: white !important;
+  background: linear-gradient(200deg, #8a3ab9, #e95950, #fccc63);
+  border-color: #8a3ab9;
+}
+.btn-instagram:focus {
+  color: white !important;
+  background: linear-gradient(200deg, #8a3ab9, #e95950, #fccc63);
+  border-color: #8a3ab9;
+}
+.btn-instagram:disabled {
+  color: white !important;
+  background: linear-gradient(200deg, #858585, #a8a8a8, #bebebe);
+  border-color: #555555;
+}
+html,
+body {
+  margin: 0;
+  width: 100%;
+}
+body {
+  background: none;
+}
+.owl-wrapper-outer {
+  height: 100% !important;
+}
+.owl-wrapper {
+  height: 100%;
+}
+.owl-item {
+  height: 100%;
+}
+.b-Amarelo {
+  height: 100%;
+}
+.owl-item h1 {
+  margin: 0;
+}
+#testimonials-slider {
+  padding: 70px 0 0 0;
+}
+#testimonials-slider .block {
+  height: 100%;
+  min-height: 190px;
+}
+.background_blue {
+  background-image: -webkit-linear-gradient(110deg, #31c8b1 10%, #d155ff 90%), url(/static/bg/diamond_upholstery.png);
+  background-image: -moz-linear-gradient(110deg, #31c8b1 10%, #d155ff 90%), url(/static/bg/diamond_upholstery.png);
+  background-image: -o-linear-gradient(110deg, #31c8b1 10%, #d155ff 90%), url(/static/bg/diamond_upholstery.png);
+  background-image: linear-gradient(110deg, #31c8b1 10%, #d155ff 90%), url(/static/bg/diamond_upholstery.png);
+  background-image: -ms-linear-gradient(left, #31c8b1, #d155ff);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#31c8b1, endColorstr=#d155ff, GradientType=1);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-attachment: fixed;
+}
+.btn-start:disabled {
+  opacity: 0.6;
+}
+.nav-item .active i {
+  opacity: 0.6;
+}
+.vertical-mid {
+  vertical-align: middle;
+}
+.form-control.register-select {
+  color: white;
+}
+.form-control.register-select option {
+  color: #555555;
+}
+.form-control.register-select:focus {
+  color: white;
+}
+.input-width {
+  width: 240px;
+}
+.image-container > input {
+  display: none;
+}
+.image-container > label {
+  display: inline;
+}
+.overlay {
+  background-color: transparent;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+.overlay-winner {
+  background-color: rgba(49, 200, 177, 0.9);
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+.overlay-loser {
+  background-color: #31c8b1;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+.centered {
+  position: fixed;
+  /* or absolute */
+  top: 32%;
+  left: 43%;
+}
+#countdown-number {
+  font-size: 100px;
+  color: #555555;
+}
+.prueba {
+  font-size: 80px;
+  color: #555555;
+}
+.chat-box {
+  border: 1px solid #cfd8dc;
+  border-radius: 5px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: block;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.chat-box .badge {
+  text-align: initial;
+  white-space: normal;
+  max-width: 90%;
+  margin-bottom: 5px;
+}
+.chat-box .badge.badge-secondary {
+  background-color: white;
+  color: #31c8b1;
+  border: 1px solid #31c8b1;
+}
+.form-control.chat-input {
+  border: 1px solid #cfd8dc;
+  padding: 6px 10px;
+  border-right: none;
+  border-radius: 5px !important;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.form-control.chat-input:focus {
+  border-right: 1px solid #31c8b1;
+}
+.input-group-append {
+  font-size: 12px;
+}
+.input-group-append .btn {
+  padding: 5px;
+}
+.btn-send {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  background-color: transparent;
+  border-bottom: 1px #cfd8dc solid;
+  border-top: 1px #cfd8dc solid;
+  border-right: 1px #cfd8dc solid;
+  position: absolute;
+  right: 0;
+  z-index: 10;
+  box-shadow: none;
+}
+.btn-send:hover {
+  transform: none;
+  box-shadow: none;
+}
+.btn-send .icon-gray {
+  color: #31c8b1;
+}
+.nav-top {
+  margin-bottom: 0;
+  height: 35px;
+}
+.chat-space {
+  margin-top: 50px;
+}
+@media only screen and (max-width: 400px) {
+  .chat-space {
+    margin-top: 35px;
+  }
+}
+.guess-button {
+  font-size: 14px;
+  background-color: #31c8b1;
+  padding: 3px;
+  border-radius: 5px;
+}
+.guess-button:focus {
+  background-color: #31c8b1;
+}
+.guess-button.disabled {
+  background-color: #cfd8dc;
+}
+.modal-dialog {
+  overflow-y: initial !important;
+}
+.modal-body {
+  height: 470px;
+  overflow-y: auto;
+}
+.modal-body.resize {
+  height: auto;
+}
+#myModal {
+  /* The Modal (background) */
+  /* Modal Content (image) */
+  /* Caption of Modal Image */
+  /* Add Animation */
+  /* The Close Button */
+}
+#myModal.modal {
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  padding-top: 100px;
+  /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: #000000;
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.9);
+  /* Black w/ opacity */
+}
+#myModal .modal-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+}
+#myModal #caption {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+#myModal .modal-content,
+#myModal #caption {
+  -webkit-animation-name: zoom;
+  -webkit-animation-duration: 0.6s;
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+@-webkit-keyframes zoom {
+  from {
+    -webkit-transform: scale(0);
+  }
+  to {
+    -webkit-transform: scale(1);
+  }
+}
+@keyframes zoom {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+#myModal .close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+#myModal .close:hover,
+#myModal .close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+input:focus ~ div .btn-send {
+  border-top-color: #31c8b1;
+  border-bottom-color: #31c8b1;
+  border-right-color: #31c8b1;
+}
+#check input[type=radio] {
+  visibility: hidden;
+}
+#check .radio input + label::before {
+  margin-right: 5px;
+}
+#check .radio input:checked + label::before {
+  content: url('/static/images/checked_icon.png');
+}
+#check .radio input:hover + label::before {
+  content: url('http://i62.tinypic.com/kasc5k.png');
+}
+#check .radio label::after {
+  background-color: transparent;
+}
+#check .radio label::before {
+  border: none;
+  top: -9px;
+}
+p {
+  margin-bottom: 0;
+}
+input[type=text] {
+  color: #000;
+}
+input[type=text]:focus {
+  color: #000 !important;
+}
+input[type=email] {
+  color: #000;
+}
+input[type=email]:focus {
+  color: #000 !important;
+}
+.list-group-item-action:focus,
+.list-group-item-action:hover {
+  color: #ffffff;
+  cursor: pointer;
+}
+.inner-space {
+  padding: 5px !important;
+}
+.card-image {
+  padding-right: 2px;
+}
+.checkbox label::before {
+  width: 14px;
+  height: 14px;
+}
+.checkbox label::after {
+  width: 14px;
+  height: 14px;
+  left: 65px;
+  top: -1px;
+}
+.btn-lg {
+  padding: .6rem 1rem;
+}
+#radio-profile .radio label::after {
+  top: 7px;
+}
+#radio-profile .radio label::before {
+  margin-top: 4px;
+}
+.whatsapp-bg {
+  background-color: #25D366 !important;
+}
+.black-white {
+  -webkit-filter: grayscale(100%);
+  /* Safari 6.0 - 9.0 */
+  filter: grayscale(100%);
+  border: none !important;
+}
+#myModal .modal-content,
+#myModal #caption {
+  -webkit-filter: grayscale(100%);
+  /* Safari 6.0 - 9.0 */
+  filter: grayscale(100%);
+}
+.btn-shop {
+  font-family: "Roboto", sans-serif;
+  background-color: #f44336;
+  padding: 5px;
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: 0.03rem;
+  border-radius: 0.35rem;
+  -moz-transition: 0.2s ease-in-out;
+  -o-transition: 0.2s ease-in-out;
+  -webkit-transition: 0.2s ease-in-out;
+  transition: 0.2s ease-in-out;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+.btn-shop:focus {
+  background-color: #f44336;
+  padding: 5px;
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: 0.03rem;
+  border-radius: 0.35rem;
+  -moz-transition: 0.2s ease-in-out;
+  -o-transition: 0.2s ease-in-out;
+  -webkit-transition: 0.2s ease-in-out;
+  transition: 0.2s ease-in-out;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+.card-login {
+  margin-top: 120px;
+}
+.full-width {
+  width: 100%;
+}
+/*# sourceMappingURL=main.css.map */

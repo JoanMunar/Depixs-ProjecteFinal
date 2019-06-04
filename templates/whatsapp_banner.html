@@ -1,0 +1,25 @@
+<div id="whatsapp-modal" class="modal fade" role="dialog" tabindex="-1" style="margin-top: 110px;">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header bg-primary" style="border-radius: 5px;">
+                <p class="modal-title white">
+                    Invita a tus amigos
+                </p>
+                <button type="button" class="close white" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body resize">
+                <p style="font-size: 16px;">
+                    Comparte este enlace con tus amigos y llévate puntos Depixs cuando se registren gracias a ti
+                </p>
+            </div>
+            <div class="modal-footer">
+                <a data-action="share/whatsapp/share"  style="padding: 0.5rem 1rem;"
+                   href="whatsapp://send?text=¡Únete a Depixs! http://www.depixs.com/register/?r={{ request.user.id }}"
+                   class="btn btn-primary">
+                    <i class="fa fa-icon fa-whatsapp"></i> Compartir
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

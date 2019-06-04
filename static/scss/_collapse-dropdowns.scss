@@ -1,0 +1,129 @@
+/*------- collapse-dropdowns -------*/
+
+.accordion .card {
+    background: $white;
+    border: none;
+    margin-bottom: 0;
+}
+
+.accordion .accordion-title {
+    font-size: 1.075rem;
+    font-weight: $regular;
+    margin-bottom: 0;
+    line-height: 1.3;
+}
+
+.accordion.w-icon .card-header:first-child {
+    border-radius: 0;
+    border-bottom: 1px solid $secondary-hover;
+}
+
+.primary-accordion.w-icon .card-header:first-child {
+    border-radius: 0;
+    border-bottom: 1px solid $primary-hover;
+}
+
+.accordion.w-icon .card-header {
+    border-bottom: 0;
+}
+
+.accordion.w-icon .card {
+    border-radius: 0;
+}
+
+.primary-accordion .card {
+    border-color: $primary-hover;
+}
+
+.primary-accordion .card-header {
+    background: $primary;
+}
+
+.dropdown-menu {
+    color: $title-color;
+    background-color: $white;
+    min-width: 12rem;
+    border: none;
+    border-radius: 2px;
+    z-index: 99;
+    margin: 0;
+    left: auto;
+    right: 0;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.dropdown-item.disabled, .dropdown-item:disabled {
+    color: $secondary-hover;
+    cursor: not-allowed;
+    background-color: transparent;
+}
+
+.dropdown-item {
+    padding: 8px 16px;
+    font-weight: $regular;
+}
+
+.dropdown-item:focus, .dropdown-item:hover {
+    color: $primary;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+.dropdown-item.active, .dropdown-item:active {
+    color: $primary-hover;
+    background-color: transparent;
+}
+
+.dropdown-header {
+    display: block;
+    padding: 8px 16px;
+    margin-bottom: 0;
+    font-size: .75rem;
+    color: $title-color;
+    white-space: nowrap;
+}
+
+.dropdown-divider {
+    height: 1px;
+    margin: .5rem 0;
+    overflow: hidden;
+    background-color: $secondary;
+}
+
+.dm-example {
+    margin-bottom: 260px;
+}
+
+.dm-example .dropdown-menu {
+    display: block;
+    position: relative;
+    z-index: 99;
+}
+
+/*--- inverse dropdown ---*/
+
+.dropdown-inverse {
+    background: $dark-grey;
+    border: none;
+}
+
+.dropdown-inverse .dropdown-item {
+    color: $grey;
+}
+
+.dropdown-inverse .dropdown-item:focus, .dropdown-inverse .dropdown-item:hover {
+    color: $white;
+    background-color: transparent;
+}
+
+.dropdown-inverse .dropdown-header {
+    color: $white;
+}
+
+.dropdown-inverse .dropdown-divider {
+    background-color: $black;
+}
+
+/*--- end of inverse dropdown ---*/
+
+/*------- end of collapse-dropdowns -------*/

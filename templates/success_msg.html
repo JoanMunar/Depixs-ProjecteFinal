@@ -1,0 +1,15 @@
+{% load sekizai_tags i18n staticfiles %}
+
+{% if success_msg %}
+    {% addtoblock 'js' %}
+        <script>
+            $(document).ready(function () {
+                swal({
+                        title:'Acción aplicada!',
+                        html:'{{ success_msg|safe }}',
+                        type:'success'
+                });
+            });
+        </script>
+    {% endaddtoblock %}
+{% endif %}

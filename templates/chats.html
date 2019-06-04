@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+{% load static staticfiles sekizai_tags %}
+
+{% block metatitle %}Chats{% endblock metatitle %}
+
+{% block body_class %}background_blue{% endblock %}
+
+{% block content %}
+
+    <div class="container nav-margin">
+        <div class="row">
+            <div class="col-12">
+                {#                <div class="card mt-5">#}
+                {#                <div class="card-body">#}
+                <!-- pill tab in card -->
+                <ul class="nav nav-pills" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link ripple-cont active" data-toggle="tab" href="#home2" role="tab"
+                           aria-expanded="true">
+                            <div class="ripple-content">
+                                <i class="md-icon dp16 mr-1">games</i>
+                                <span class="va-middle">Juegos</span></div>
+                            <div class="ink-content" style=""></div>
+                        </a>
+                    </li>
+                    <li class="nav-item ml-4">
+                        <a class="nav-link ripple-cont" data-toggle="tab" href="#profile2" role="tab"
+                           aria-expanded="true">
+                            <div class="ripple-content">
+                                <i class="md-icon dp16 mr-1">chat</i>
+                                <span class="va-middle">Contactos</span>
+                            </div>
+                            <div class="ink-content" style=""></div>
+                        </a>
+                    </li>
+                </ul><!-- / nav tabs -->
+                <div class="tab-content">
+                    <div class="tab-pane fade mt-3 active show" id="home2" role="tabpanel" aria-expanded="true">
+                        {% for game in games %}
+                            {% if request.user.id == game.user_one.id %}
+                                <a href="{% url 'chat' pk=game.id %}">
+                                    <div class="block icon-block bg-primary w-border-2x border-primary dark inner-space rounded-2x">
+                                        <div class="row">
+                                            <div class="col-3 mt-auto mb-auto" style="padding-right: 2px;">
+                                                <img id="myImg" src="{{ game.get_pixelated_image_url }}"
+                                                     style="width: 60px;display: block; margin: 0 auto;"
+                                                     class="circle raised move black-white">
+                                            </div>
+                                            <div class="col-9" style="margin-top: auto; margin-bottom: auto;">
+                                                <div class="row">
+                                                    <div class="col-8">
+                                                        <span style="color: white;">
+                                                            @?????
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <p>{{ game.last_interaction.message|truncatechars:20 }}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            {% elif request.user.id != game.user_one.id and game.percent_depix < 100 %}
+                                <a href="{% url 'chat' pk=game.id %}">
+                                    <div class="block icon-block bg-primary w-border-2x border-primary dark inner-space rounded-2x">
+                                        <div class="row">
+                                            <div class="col-3 mt-auto mb-auto" style="padding-right: 2px;">
+                                                <img id="myImg" src="/media/{{ game.user_one.image }}"
+                                                     style="height: 60px; width:60px; display: block;margin: 0 auto; object-fit: cover;"
+                                                     class="circle raised move">
+                                            </div>
+                                            <div class="col-9" style="margin-top: auto; margin-bottom: auto;">
+                                                <p>@{{ game.user_one.username }}</p>
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <p>{{ game.last_interaction.message|truncatechars:20 }}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            {% endif %}
+                        {% empty %}
+                            <div class="block icon-block bg-primary w-border-2x border-primary dark inner-space rounded-2x">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <p>No se han encontrado juegos activos</p>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="tab-pane fade mt-3" id="profile2" role="tabpanel" aria-expanded="false">
+                        {% for chat in chats %}
+                            {% if request.user.id != chat.user_one.id and chat.percent_depix >= 100 %}
+                                <a href="{% url 'chat' pk=chat.id %}">
+                                    <div class="block icon-block bg-primary w-border-2x border-primary dark inner-space rounded-2x">
+                                        <div class="row">
+                                            <div class="col-3 mt-auto mb-auto">
+                                                <img id="myImg" src="/media/{{ chat.user_one.image }}"
+                                                     style="width: 60px; height:60px;display: block;margin: 0 auto; object-fit: cover;"
+                                                     class="circle raised move">
+                                            </div>
+                                            <div class="col-9" style="margin-top: auto; margin-bottom: auto;">
+                                                <p>@{{ chat.user_one.username }}</p>
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <p>{{ chat.last_interaction.message|truncatechars:20 }}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            {% elif request.user.id == chat.user_one.id and chat.percent_depix >= 100 %}
+                                <a href="{% url 'chat' pk=chat.id %}">
+                                    <div class="block icon-block bg-primary w-border-2x border-primary dark inner-space rounded-2x">
+                                        <div class="row">
+                                            <div class="col-3 mt-auto mb-auto" style="padding-right: 2px;">
+                                                <img id="myImg" src="/media/{{ chat.user_two.image }}"
+                                                     style="display: block; margin: 0 auto; width: 60px; height: 60px;
+                                                     object-fit: cover;" class="circle raised move">
+                                            </div>
+                                            <div class="col-9" style="margin-top: auto; margin-bottom: auto;">
+                                                <p>@{{ chat.user_two.username }}</p>
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <p>{{ chat.last_interaction.message|truncatechars:20 }}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            {% endif %}
+                        {% empty %}
+                            <div class="block icon-block bg-primary w-border-2x border-primary dark inner-space rounded-2x">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <p>No se han encontrado chats activos</p>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div><!-- / tab-content -->
+                <!-- / pill tab in card -->
+            </div><!-- / column -->
+        </div>
+    </div>
+
+{% endblock %}

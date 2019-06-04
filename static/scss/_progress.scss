@@ -1,0 +1,24 @@
+/*------- progress -------*/
+
+.progress {
+    margin-bottom: 20px;
+}
+
+.progress {
+    font-size: .75rem;
+    line-height: 1rem;
+    background: $secondary;
+    border-radius: 4px;
+}
+
+.progress-bar {
+    height: 1rem;
+    color: $white;
+    background-color: $primary;
+}
+
+.progress-bar.animated {
+    margin-bottom: -0.1px;
+}
+
+/*------- end of progress -------*/

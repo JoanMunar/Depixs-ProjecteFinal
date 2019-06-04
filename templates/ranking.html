@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% load static staticfiles sekizai_tags thumbnail %}
+
+{% block metatitle %}Ranking{% endblock metatitle %}
+
+{% block body_class %}background_blue{% endblock %}
+
+{% block content %}
+    {% include 'whatsapp_banner.html' %}
+    <div class="container nav-margin">
+        <div class="row">
+            <div class="col-12">
+                {#                <div class=" mt-5 card">#}
+                {#                    <div class="card-body">#}
+                <form method="GET">
+                    <div class="accordion" id="accordionExample">
+                        <div class="card">
+                            <div class="card-header bg-primary" id="headingOne">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link white" style="width: 100%" type="button"
+                                            data-toggle="collapse"
+                                            data-target="#collapseOne"
+                                            aria-expanded="true" aria-controls="collapseOne">
+                                        Filtros de búsqueda
+                                        <i class="material-icons text-right vertical-mid float-right">keyboard_arrow_down</i>
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="collapseOne" class="collapse" aria-labelledby="headingOne"
+                                 data-parent="#accordionExample">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <input type="text"
+                                               {% if filters.username %}value="{{ filters.username }}" {% endif %}
+                                               class="form-control" name="username" placeholder="Nombre de usuario"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <select class="form-control" id="college" name="college">
+                                            <option value="">Selecciona tu universidad</option>
+                                            {% for college in colleges %}
+                                                <option value="{{ college.id }}"
+                                                        {% if filters.college|slugify == college.id|slugify %}selected{% endif %}>
+                                                    {{ college.name }}
+                                                </option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <select class="form-control" id="study" name="study">
+                                            <option value="">Selecciona tu rama</option>
+                                            {% for study in studies %}
+                                                <option value="{{ study.id }}"
+                                                        {% if filters.study|slugify == study.id|slugify %}selected{% endif %}>
+                                                    {{ study.name }}
+                                                </option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary" style="width: 100%;">
+                                        Buscar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="tab-content">
+                    <div class="tab-pane fade mt-3 active show" id="home2" role="tabpanel" aria-expanded="true">
+                        {% for user in users %}
+                            <div class="block icon-block bg-primary w-border-2x border-primary dark inner-space rounded-2x">
+                                <div class="row">
+                                    <div class="card-image col-3 mt-auto mb-auto">
+                                        {% if user.image %}
+                                                <img id="img" src="/media/{{ user.image }}"
+                                                     style="height: 70px; width:70px; display: block;margin: 0 auto; object-fit: cover;"
+                                                     class="circle raised move">
+                                        {% else %}
+                                            <img id="img" src="{% static 'images/login_img.jpg' %}" width="300"
+                                                 height="300" class="circle raised move">
+                                        {% endif %}
+                                    </div>
+                                    <div class="col-9">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <p>@{{ user.username }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <p style="font-size: 12px">{{ user.college }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <a href="https://www.instagram.com/{{ user.username }}/" target="_blank">
+                                                    <i class="fa fa-instagram"></i>
+                                                </a>
+                                            </div>
+                                            <div class="col-8">
+                                                <p style="font-size: 16px">
+                                                    Puntos:<strong>{{ user.points }}</strong>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div><!-- / tab-content -->
+                <!-- / pill tab in card -->
+                {#                    </div>#}
+                {#                </div>#}
+                {#            </div>#}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

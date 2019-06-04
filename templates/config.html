@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static staticfiles sekizai_tags %}
+
+{% block metatitle %}Settings{% endblock metatitle %}
+
+{% block body_class %}background_blue{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="list-group" style="width: 100%;">
+                <button type="button" class="list-group-item list-group-item-action disabled bg-primary">
+                    <i class="material-icons white" style="vertical-align: middle; font-size: 18px;">settings</i>
+                    <strong class="white vertical-mid">Configuración</strong>
+                </button>
+                <button onclick="window.location.href = '{% url 'user_profile' %}';" type="button"
+                        class="list-group-item list-group-item-action white bg-primary">
+                    <i class="material-icons white" style="vertical-align: middle; font-size: 18px;">person</i>
+                    Perfil usuario
+                </button>
+                <button type="button" class="list-group-item list-group-item-action white whatsapp-bg"
+                    onclick="window.location.href = 'https://api.whatsapp.com/send?phone=34671823341';">
+                    <i class="fa fa-whatsapp white" style="vertical-align: middle; font-size: 18px;"></i>
+                    Ayúdanos a mejorar
+                </button>
+                <button onclick="window.location.href = '{% url 'logout' %}';" type="button"
+                        class="list-group-item list-group-item-action white bg-primary">
+                    <i class="material-icons white" style="vertical-align: middle; font-size: 18px;">exit_to_app</i>
+                    Cerrar sesión
+                </button>
+            </div>
+        </div>
+    </div>
+{% endblock %}

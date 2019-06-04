@@ -1,0 +1,98 @@
+/*------- footers -------*/
+
+footer {
+    background: $white;
+    border-top: 1px solid $light-grey;
+    padding: 30px 0;
+}
+
+footer.light {
+    background: $secondary;
+    border-top: 1px solid $secondary-hover;
+}
+
+footer.transparent {
+    background: transparent;
+    border-top: 0;
+}
+
+footer.footer-inverse {
+    background: $black;
+}
+
+footer.dark p {
+    color: $light-grey;
+}
+
+footer.dark a {
+    color: $white;
+}
+
+footer.dark a:hover {
+    color: $grey;
+}
+
+.footer-brand img {
+    width: auto;
+    max-height: 20px;
+    float: left;
+}
+
+.footer-menu {
+    display: inline-block;
+    float: none;
+}
+
+.footer-menu-item {
+    color: $title-color;
+    font-weight: $bold;
+    margin: 0 7.5px;
+}
+
+.footer-social {
+    display: inline-block;
+    float: right;
+    margin-top: -4px;
+}
+
+footer p {
+    color: $title-color;
+    margin-bottom: 0;
+}
+
+.footer-left-area {
+    text-align: left;
+}
+
+.footer-right-area {
+    text-align: right;
+}
+
+.blockquote-footer {
+    background: transparent;
+}
+
+/*--- footer widgets ---*/
+
+.footer-widget-brand img {
+    max-width: 75px;
+}
+
+footer .widget-title {
+    font-size: 1.075rem;
+    margin-bottom: 20px;
+}
+
+.social-feed i {
+    color: $twitter;
+    font-size: 1.5rem;
+}
+
+.footer-secondary {
+    border-top: 1px solid $secondary-hover;
+    padding-top: 25px;
+}
+
+/*--- end of footer widgets ---*/
+
+/*------- end of footers -------*/
